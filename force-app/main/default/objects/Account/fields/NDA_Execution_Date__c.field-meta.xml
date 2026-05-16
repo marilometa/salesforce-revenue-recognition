@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NDA_Execution_Date__c</fullName>
+    <description>The date on which the NDA was fully executed by both parties.</description>
+    <inlineHelpText>Enter the date when the NDA was signed by all parties. This confirms the NDA is legally in effect and may differ from the expiration date.</inlineHelpText>
+    <label>NDA Execution Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

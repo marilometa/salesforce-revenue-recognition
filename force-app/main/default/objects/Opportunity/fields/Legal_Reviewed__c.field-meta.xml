@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Legal_Reviewed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Confirms that the SOW has been reviewed and approved by the Legal team.</description>
+    <inlineHelpText>Check this box after Legal has completed their review and confirmed that the SOW terms are acceptable. This does not indicate execution.</inlineHelpText>
+    <label>Legal Reviewed</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

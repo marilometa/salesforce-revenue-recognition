@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Deliverable__c</fullName>
+    <description>Links this Deliverable Line Item to its parent Deliverable. Each Deliverable Line Item represents a single unit of delivery under the parent Deliverable and is used for unit-level delivery tracking and rollups.</description>
+    <inlineHelpText>Select the Deliverable this line item belongs to. Deliverable Line Items are created to track delivery at the unit level when a Deliverable represents multiple units of work.</inlineHelpText>
+    <label>Deliverable</label>
+    <referenceTo>Project_Deliverable__c</referenceTo>
+    <relationshipLabel>Deliverable Line Items</relationshipLabel>
+    <relationshipName>Deliverable_Line_Items</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Legal_Review_Before_Delivered</fullName>
+    <active>true</active>
+    <description>Legal review is a pre-execution step, not something that happens afterward.</description>
+    <errorConditionFormula>AND(
+  ISCHANGED(SOW_Delivered__c),
+  SOW_Delivered__c = TRUE,
+  OR(
+    Legal_Reviewed__c = FALSE,
+    Finance_Reviewed__c = FALSE
+  )
+)</errorConditionFormula>
+    <errorMessage>Legal &amp; Finance review must be completed before the SOW is delivered.</errorMessage>
+</ValidationRule>

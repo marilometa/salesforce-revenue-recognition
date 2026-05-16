@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Count the records collected from Opportunity Splits</description>
+        <name>Count_the_records_collected_from_Opportunity_Splits</name>
+        <label>Count the records collected from Opportunity Splits</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>RecordCountSplit</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Get_Opportunity_Splits_Records</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Opportunity_Teams_records</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Count the records collected from Opportunity Teams</description>
+        <name>Count_the_records_collected_from_Opportunity_Teams</name>
+        <label>Count the records collected from Opportunity Teams</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>RecordCountTeam</assignToReference>
+            <operator>AssignCount</operator>
+            <value>
+                <elementReference>Get_Opportunity_Teams_records</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Decide_if_there_are_more_than_one_default_team_or_split_member</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check if there are Opportunity team members or member splits different from the Opportunity owner</description>
+        <name>Decide_if_there_are_more_than_one_default_team_or_split_member</name>
+        <label>Decide if there are more than one default team or split member</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>RecordCountSplit</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>1.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>RecordCountTeam</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>1.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Credit_Allocated</targetReference>
+            </connector>
+            <label>Team or Credit exists other than the default owner</label>
+        </rules>
+    </decisions>
+    <description>This Scheduled flow will auto-confirm the Credit Allocation based on Opportunity Teams or Opportunity Splits if there exist other than the Opportunity owner.</description>
+    <environments>Default</environments>
+    <interviewLabel>Auto-Confirm Credit Allocation from Opportunity Team and Splits {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Auto-Confirm Credit Allocation from Opportunity Team and Splits</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>This will get the records from opportunity splits which matches the trigger opportunity ID</description>
+        <name>Get_Opportunity_Splits_Records</name>
+        <label>Get Opportunity Splits Records</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Count_the_records_collected_from_Opportunity_Splits</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OpportunityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>OpportunitySplit</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>This will get the records from opportunity teams which matches the trigger opportunity ID</description>
+        <name>Get_Opportunity_Teams_records</name>
+        <label>Get Opportunity Teams records</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Count_the_records_collected_from_Opportunity_Teams</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OpportunityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>OpportunityTeamMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Credit_Allocated</name>
+        <label>Update Credit Allocated</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Opportunity_Credit_Allocated__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Opportunity_Splits_Records</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>StageName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>StageName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Closed Lost</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Opportunity_Credit_Allocated__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>RecordCountSplit</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>RecordCountTeam</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+</Flow>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Net_Terms__c</fullName>
+    <description>Invoice-to-cash lag for this Opportunity (e.g., Net 30). Inherited from parent Account on Create via Set_Opportunity_Net_Terms_From_Account flow; user-overridable at any time. Drives cash collection forecast timing on related Payment Schedules. Formula tolerates legacy free-text formats during data migration windows.</description>
+    <inlineHelpText>Inherited from the Account on Create. Override here if this specific deal has different invoice-to-cash terms than the standard customer terms.</inlineHelpText>
+    <label>Invoice Payment Terms</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Net 10 days, 2% discount</fullName>
+                <default>false</default>
+                <label>Net 10 days, 2% discount</label>
+            </value>
+            <value>
+                <fullName>Net 15</fullName>
+                <default>false</default>
+                <label>Net 15</label>
+            </value>
+            <value>
+                <fullName>Net 30</fullName>
+                <default>false</default>
+                <label>Net 30</label>
+            </value>
+            <value>
+                <fullName>Net 30 EOM</fullName>
+                <default>false</default>
+                <label>Net 30 EOM</label>
+            </value>
+            <value>
+                <fullName>Net 45</fullName>
+                <default>false</default>
+                <label>Net 45</label>
+            </value>
+            <value>
+                <fullName>Net 60</fullName>
+                <default>false</default>
+                <label>Net 60</label>
+            </value>
+            <value>
+                <fullName>Net 75</fullName>
+                <default>false</default>
+                <label>Net 75</label>
+            </value>
+            <value>
+                <fullName>Net 90</fullName>
+                <default>false</default>
+                <label>Net 90</label>
+            </value>
+            <value>
+                <fullName>2/20 Net 90</fullName>
+                <default>false</default>
+                <label>2/20 Net 90</label>
+            </value>
+            <value>
+                <fullName>Custom</fullName>
+                <default>false</default>
+                <label>Custom</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

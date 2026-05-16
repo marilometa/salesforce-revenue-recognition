@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validation_Rule_Formula_for_URL_Only</fullName>
+    <active>true</active>
+    <description>Validation_Rule_Formula_for_URL_only</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK(SOW_SharePoint_Folder__c)),
+  NOT(
+    REGEX(
+      SOW_SharePoint_Folder__c,
+      &quot;^(https?:\\/\\/)([\\w-]+\\.)+[\\w-]+(\\/.*)?$&quot;
+    )
+  )
+)</errorConditionFormula>
+    <errorDisplayField>SOW_SharePoint_Folder__c</errorDisplayField>
+    <errorMessage>Please enter a valid URL</errorMessage>
+</ValidationRule>

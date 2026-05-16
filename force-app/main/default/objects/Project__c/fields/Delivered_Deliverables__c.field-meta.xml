@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivered_Deliverables__c</fullName>
+    <description>Counts how many Project Deliverables have a Status of &quot;Delivered&quot;.</description>
+    <inlineHelpText>The number of deliverables that have been fully delivered and accepted by the customer.</inlineHelpText>
+    <label>Delivered Deliverables</label>
+    <summarizedField>Project_Deliverable__c.Delivered_Units__c</summarizedField>
+    <summaryForeignKey>Project_Deliverable__c.Project__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

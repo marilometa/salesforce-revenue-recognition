@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivered_Units__c</fullName>
+    <description>Counts the number of Deliverable Line Items marked as Delivered for this Deliverable. This represents how many individual units of the Deliverable have been completed by Operations.</description>
+    <inlineHelpText>Automatically calculated. Each Deliverable Line Item represents one unit of work.
+This field shows how many units have been delivered so far and is used to track delivery progress and earned value visibility.
+Do not edit manually.</inlineHelpText>
+    <label>Delivered Units</label>
+    <summaryFilterItems>
+        <field>Deliverable_Line_Item__c.Delivery_Status__c</field>
+        <operation>equals</operation>
+        <value>Delivered</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Deliverable_Line_Item__c.Project_Deliverable__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

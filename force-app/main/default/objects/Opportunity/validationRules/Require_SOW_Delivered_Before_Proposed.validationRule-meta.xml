@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_SOW_Delivered_Before_Proposed</fullName>
+    <active>true</active>
+    <description>Before an Opportunity can move to Proposed:
+Legal must have reviewed it
+Finance must have reviewed it
+The SOW must be Delivered</description>
+    <errorConditionFormula>AND(
+  ISCHANGED(StageName),
+  ISPICKVAL(StageName, &quot;Propose&quot;),
+  OR(
+    NOT(SOW_Delivered__c),
+    NOT(Legal_Reviewed__c),
+    NOT(Finance_Reviewed__c)
+  )
+)</errorConditionFormula>
+    <errorDisplayField>StageName</errorDisplayField>
+    <errorMessage>Before moving this Opportunity to Proposed, the SOW must reviewed by both Legal and Finance and checked delivered,</errorMessage>
+</ValidationRule>

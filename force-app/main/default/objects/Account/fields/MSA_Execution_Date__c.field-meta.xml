@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MSA_Execution_Date__c</fullName>
+    <description>The date on which the Master Services Agreement was fully executed by both parties.</description>
+    <inlineHelpText>Enter the date when the MSA was signed by all parties. This confirms the agreement is legally in effect and may differ from the expiration date.</inlineHelpText>
+    <label>MSA Execution Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

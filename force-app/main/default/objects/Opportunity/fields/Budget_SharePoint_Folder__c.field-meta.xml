@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Budget_SharePoint_Folder__c</fullName>
+    <description>Link to the SharePoint location containing the approved budget files for this deliverable. Salesforce stores the reference only, budgeting and document management remain in SharePoint.</description>
+    <inlineHelpText>Paste the SharePoint link where the budget and supporting financial documents for this deliverable are stored. This link is used for visibility and coordination only, budget files are not managed in Salesforce.</inlineHelpText>
+    <label>Budget / SharePoint Folder</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Url</type>
+</CustomField>

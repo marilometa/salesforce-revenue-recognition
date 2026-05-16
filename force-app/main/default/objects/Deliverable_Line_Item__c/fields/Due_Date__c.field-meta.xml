@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Due_Date__c</fullName>
+    <description>Tracks the committed due date for this deliverable.
+This date is used for planning, reporting, and deadline visibility across the project.</description>
+    <inlineHelpText>The date this deliverable is expected to be completed and ready for review or delivery.
+Use the agreed deadline, not an estimate or start date.</inlineHelpText>
+    <label>Due Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

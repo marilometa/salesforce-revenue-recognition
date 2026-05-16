@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finance_Reviewed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Confirms that the SOW has been reviewed and approved by the Finance team.</description>
+    <inlineHelpText>Check this box once Finance has reviewed pricing, billing terms, and revenue implications and approved the SOW.</inlineHelpText>
+    <label>Finance Reviewed</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>
