@@ -57,7 +57,7 @@ By design, this repository excludes:
 
 - **Real data.** No records, no exports, no migration CSVs.
 - **Customer-specific configurations.** Page layouts, Lightning pages, app menus, dashboards, custom apps, and any UI surfaces that were branded or tuned for the production org.
-- **Industry-context fields.** A handful of Opportunity fields in the original org carried industry-specific naming (clinical-trial conference flags, drug-regimen classifications). These were excluded from the extract since they don't generalize as reference architecture.
+- **Industry-specific fields and labels.** A small set of Opportunity fields in the original org carried domain-specific naming and segmentation that doesn't generalize as reference architecture. These were excluded from the extract.
 - **File-management automation.** The original org included ContentDocumentLink/ContentVersion triggers and an OpportunityFileCount batch for file-count rollups onto Opportunity. These are file-management plumbing, unrelated to revenue recognition, and excluded for clarity.
 - **Notification flows tied to obsolete state.** Two flows that fired email alerts on Opportunity Amount changes and SOW PDF attachment events were marked `Obsolete` in source; they're excluded from the reference.
 - **Integration credentials, named credentials, external services.** None included.
