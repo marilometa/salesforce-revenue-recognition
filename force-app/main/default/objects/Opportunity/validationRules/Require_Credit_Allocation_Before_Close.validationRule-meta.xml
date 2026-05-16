@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Credit_Allocation_Before_Close</fullName>
+    <active>true</active>
+    <description>Require Credit Allocation Before Close Won</description>
+    <errorConditionFormula>AND(
+OR(
+ISCHANGED(StageName),
+ISCHANGED(Opportunity_Credit_Allocated__c)
+),
+ISPICKVAL(StageName , &quot;Closed Won&quot;),
+NOT( Opportunity_Credit_Allocated__c )
+)</errorConditionFormula>
+    <errorMessage>Before closing this Opportunity, please confirm Opportunity Credit Allocation field.
+Add Opportunity Team members and/or Opportunity Splits, or manually check Opportunity Credit Allocation if N/A.</errorMessage>
+</ValidationRule>

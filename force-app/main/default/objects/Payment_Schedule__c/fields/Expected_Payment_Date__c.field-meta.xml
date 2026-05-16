@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expected_Payment_Date__c</fullName>
+    <description>Projected cash collection date. Basis-switching logic: if Invoice_Date__c is populated, it is used as the basis; otherwise Expected_Trigger_Date__c is used. The Opportunity&apos;s Net_Terms__c value is then translated to a day offset and added to that basis. Forecast treatment notes: discount terms (e.g., &quot;Net 10 days, 2% discount&quot;) are treated conservatively at the discount day count (assumes customer takes the discount); end-of-month terms (e.g., &quot;Net 30 EOM&quot;) are approximated as a fixed offset (precise EOM math is deferred); two-tier terms (e.g., &quot;2/20 Net 90&quot;) are treated conservatively at the longer arm (assumes customer forgoes the discount). Custom or null terms default to 30 days. Read-only formula.</description>
+    <externalId>false</externalId>
+    <formula>BLANKVALUE(Invoice_Date__c, Expected_Trigger_Date__c) +
+CASE(
+  TEXT(Opportunity__r.Net_Terms__c),
+  "Net 10 days, 2% discount", 10,
+  "Net 15", 15,
+  "Net 30", 30,
+  "Net 30 EOM", 45,
+  "Net 45", 45,
+  "Net 60", 60,
+  "Net 75", 75,
+  "Net 90", 90,
+  "2/20 Net 90", 90,
+  30
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Expected Payment Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

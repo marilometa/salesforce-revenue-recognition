@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SOW_Executed_Requires_Reviews</fullName>
+    <active>true</active>
+    <description>You cannot mark an SOW as Executed unless Legal and Finance have both reviewed it and SOW is delivered.</description>
+    <errorConditionFormula>AND(
+OR(
+ISCHANGED(SOW_Executed__c),
+ISCHANGED(Legal_Reviewed__c),
+ISCHANGED(Finance_Reviewed__c),
+ISCHANGED(SOW_Delivered__c)
+),
+SOW_Executed__c = TRUE,
+OR(
+Legal_Reviewed__c = FALSE,
+Finance_Reviewed__c = FALSE,
+SOW_Delivered__c = FALSE
+)
+)</errorConditionFormula>
+    <errorDisplayField>SOW_Executed__c</errorDisplayField>
+    <errorMessage>The SOW cannot be marked as Executed until it has been reviewed by both Legal and Finance, and is delivered.</errorMessage>
+</ValidationRule>

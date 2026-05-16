@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Number__c</fullName>
+    <description>Legacy project identifier from an external project tracker. Used by backfill automation to seed Project__c.Name on closed-won Opportunities that pre-date the Salesforce-native Project model. Intended for graceful retirement once full project history is migrated and the lookup to Project__c becomes the system of record.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>Legacy project identifier from an external project tracker.</inlineHelpText>
+    <label>Project #</label>
+    <length>50</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

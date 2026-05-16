@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expected_Trigger_Date__c</fullName>
+    <description>The date this milestone is expected to fire — i.e., when the invoice would be sent based on current plan. Used as the basis for Expected_Payment_Date__c when no actual Invoice_Date__c has been recorded yet.</description>
+    <externalId>false</externalId>
+    <label>Expected Trigger Date</label>
+    <required>true</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

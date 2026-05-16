@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MSA_Completed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether an MSA (Master Services Agreement) is currently active for this account.</description>
+    <inlineHelpText>Check this box if there is an active MSA with this customer. When checked, an MSA Expiration Date is required.</inlineHelpText>
+    <label>MSA Completed</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

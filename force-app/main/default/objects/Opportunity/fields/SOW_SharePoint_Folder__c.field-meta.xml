@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SOW_SharePoint_Folder__c</fullName>
+    <description>Link to the SharePoint location where the Statement of Work (SOW) is reviewed, redlined, and finalized outside of Salesforce.</description>
+    <inlineHelpText>Use this link to access the SharePoint workspace where the SOW is collaboratively reviewed and edited.
+All document changes happen in SharePoint. Salesforce only tracks review readiness.</inlineHelpText>
+    <label>SOW / SharePoint Folder</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Url</type>
+</CustomField>

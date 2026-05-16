@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Parent Opportunity this Payment Schedule belongs to. Required. Source of Invoice Payment Terms (Net X days) used by the Expected_Payment_Date__c formula.</description>
+    <label>Opportunity</label>
+    <referenceTo>Opportunity</referenceTo>
+    <relationshipLabel>Payment Schedules</relationshipLabel>
+    <relationshipName>Payment_Schedules</relationshipName>
+    <required>true</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

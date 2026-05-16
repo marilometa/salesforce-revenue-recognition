@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NDA_Expiration_Required</fullName>
+    <active>true</active>
+    <description>Prevents users from marking the NDA checkbox as TRUE without entering the NDA expiration date.</description>
+    <errorConditionFormula>AND(
+     NDA_Completed__c = TRUE,
+    ISBLANK( NDA_Expiration_Date__c )
+)</errorConditionFormula>
+    <errorDisplayField>NDA_Expiration_Date__c</errorDisplayField>
+    <errorMessage>Please enter the NDA Expiration Date when NDA is checked.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Project_Already_Exists</name>
+        <label>Project Already Exists?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>No - Create Project</defaultConnectorLabel>
+        <defaultConnector>
+            <targetReference>Create_Project_Record</targetReference>
+        </defaultConnector>
+        <rules>
+            <name>Yes_Skip</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Existing_Project.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Yes - Skip (Project Exists)</label>
+        </rules>
+    </decisions>
+    <description>One-time backfill for legacy Closed Won Opportunities that have Project_Number__c populated but no related Project__c record. For each matching Opportunity, creates a Project (Name = Project_Number__c, linked back to the Opp). The existing Bootstrap_Deliverables_on_Project_Create scheduled-path flow then auto-creates Deliverables and DLIs from any OpportunityLineItems. Idempotent: skips Opps that already have a Project (safe to re-run). Deployed as Draft so it does not auto-activate; admin schedules it manually when ready.</description>
+    <environments>Default</environments>
+    <interviewLabel>Backfill Projects For Legacy Closed Won Opps {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Backfill Projects For Legacy Closed Won Opps</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Creates one Project for the current Opportunity. OwnerId defaults to the running user; Project_Manager__c is left blank so the team can populate it after backfill without errors on inactive Opp owners.</description>
+        <name>Create_Project_Record</name>
+        <label>Create Project Record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Kickoff_Date__c</field>
+            <value>
+                <elementReference>$Record.CloseDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>$Record.Project_Number__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Opportunity__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Project_Name__c</field>
+            <value>
+                <elementReference>ProjectNameFormula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Project_Notes__c</field>
+            <value>
+                <elementReference>BackfillNotesTemplate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Project_Status__c</field>
+            <value>
+                <stringValue>Planned</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Project__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <description>Idempotency check: skip if a Project already exists for this Opportunity.</description>
+        <name>Get_Existing_Project</name>
+        <label>Get Existing Project</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Project_Already_Exists</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Opportunity__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Project__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <formulas>
+        <name>ProjectNameFormula</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Name} + &quot; - Project&quot;</expression>
+    </formulas>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Existing_Project</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Project_Number__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <schedule>
+            <frequency>Once</frequency>
+            <startDate>2030-01-01</startDate>
+            <startTime>06:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Draft</status>
+    <textTemplates>
+        <name>BackfillNotesTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Backfilled from legacy Closed Won Opportunity by Backfill_Projects_For_Legacy_Closed_Won_Opps on {!$Flow.CurrentDate}.
+Source Opportunity: {!$Record.Name}
+Close Date: {!$Record.CloseDate}
+Amount: {!$Record.Amount}
+Owner: {!$Record.Owner:User.Name}</text>
+    </textTemplates>
+</Flow>

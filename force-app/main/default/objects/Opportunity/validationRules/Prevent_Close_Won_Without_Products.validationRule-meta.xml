@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Close_Won_Without_Products</fullName>
+    <active>true</active>
+    <description>Prevents an Opportunity from being marked Closed Won unless at least one Opportunity Product exists. Ensures delivery, finance, and reporting integrity downstream.</description>
+    <errorConditionFormula>AND(
+  ISCHANGED(StageName),
+  ISPICKVAL(StageName, &quot;Closed Won&quot;),
+  NOT(HasOpportunityLineItem)
+)</errorConditionFormula>
+    <errorMessage>You must add at least one Product to the Opportunity before marking it Closed Won.</errorMessage>
+</ValidationRule>

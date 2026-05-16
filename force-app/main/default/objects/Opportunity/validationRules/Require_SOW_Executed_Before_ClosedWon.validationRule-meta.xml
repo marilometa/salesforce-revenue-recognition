@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_SOW_Executed_Before_ClosedWon</fullName>
+    <active>true</active>
+    <description>SOW Executed is checked, and only then the Opportunity can move to Closed.</description>
+    <errorConditionFormula>AND(
+  ISCHANGED(StageName),
+  ISPICKVAL(StageName, &quot;Closed Won&quot;),
+  NOT( SOW_Executed__c )
+)</errorConditionFormula>
+    <errorMessage>Before moving this Opportunity to Closed, the SOW Executed must be checked.</errorMessage>
+</ValidationRule>

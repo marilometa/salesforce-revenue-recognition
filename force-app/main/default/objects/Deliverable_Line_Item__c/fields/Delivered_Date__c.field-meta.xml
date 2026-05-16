@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivered_Date__c</fullName>
+    <description>Date on which this deliverable unit was completed and marked as Delivered.</description>
+    <inlineHelpText>Automatically populated when the Delivery Status is set to Delivered. Represents the completion date of this unit for operational tracking and reporting.</inlineHelpText>
+    <label>Actual Delivered Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

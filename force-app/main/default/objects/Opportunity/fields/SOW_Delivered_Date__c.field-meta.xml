@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SOW_Delivered_Date__c</fullName>
+    <description>Date when the Statement of Work (SOW) becomes effective. This date is automatically populated when the SOW Delivered checkbox is marked true, unless already provided manually.</description>
+    <inlineHelpText>Indicates the effective start date of the SOW. This field is automatically set when the SOW is marked as delivered, but can be entered manually if the SOW started earlier.</inlineHelpText>
+    <label>SOW Delivered Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>true</trackTrending>
+    <type>Date</type>
+</CustomField>
