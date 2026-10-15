@@ -21,9 +21,9 @@
                 <label>Monthly</label>
             </value>
             <value>
-                <fullName>Quartley</fullName>
+                <fullName>Quarterly</fullName>
                 <default>false</default>
-                <label>Quartley</label>
+                <label>Quarterly</label>
             </value>
             <value>
                 <fullName>Annual</fullName>
