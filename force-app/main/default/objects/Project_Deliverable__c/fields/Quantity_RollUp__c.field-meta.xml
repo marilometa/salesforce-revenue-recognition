@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Quantity_RollUp__c</fullName>
     <description>Roll-up summary quantity from Deliverable Line Items</description>
-    <label>QuantityRollUp</label>
+    <label>Quantity Roll-Up</label>
     <summaryForeignKey>Deliverable_Line_Item__c.Project_Deliverable__c</summaryForeignKey>
     <summaryOperation>count</summaryOperation>
     <trackHistory>false</trackHistory>

@@ -26,7 +26,7 @@ Profiles are used for license, app, and system permissions only. All custom obje
 The four permission sets in this extract divide along functional lines:
 
 - `Access_Projects_and_Deliverables` — full CRED on the project hierarchy, for the delivery team.
-- `Cash_Forecasting_Access` — read on Net Terms across Account/Opp, full CRED on Payment_Schedule, for finance/forecasting users.
+- `Cash_Forecasting_Access` — read and edit on Net Terms across Account/Opp, full CRED on Payment_Schedule, for finance/forecasting users.
 - `Edit_rights_to_Finance_reviewed` — narrow grant for the single Finance Reviewed checkbox, for the finance leads who flip it.
 - `Edit_rights_to_PM_notes` — narrow grant for the PM Notes field, scoped to PMs.
 

@@ -16,5 +16,5 @@ The SOW must be Delivered</description>
   )
 )</errorConditionFormula>
     <errorDisplayField>StageName</errorDisplayField>
-    <errorMessage>Before moving this Opportunity to Proposed, the SOW must reviewed by both Legal and Finance and checked delivered,</errorMessage>
+    <errorMessage>Before moving this Opportunity to Propose, Legal and Finance must review the SOW and it must be marked delivered.</errorMessage>
 </ValidationRule>

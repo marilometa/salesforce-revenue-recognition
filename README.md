@@ -13,11 +13,28 @@ Standard Salesforce covers the sales funnel (Lead → Opportunity → Closed Won
 - SFDX source format, API version 66.0
 - No managed packages, no Apex on the revenue path
 
+## Before you deploy
+
+This repository is the architecture surface, not a complete org. Create these in the target org first, or the deploy will fail:
+
+- **Tabs** for `Project__c`, `Project_Deliverable__c`, `Deliverable_Line_Item__c` and `Payment_Schedule__c`. The permission sets grant access to them.
+- **Report folder** `SOWLifecycle`, for the four reports.
+- **Email alert** `Opportunity.Notification_to_Finance_when_SOW_Delivered_TRUE`, used by the SOW notification flow.
+- **Public group** `Finance_Team`, used by the approval flow.
+- **Opportunity Splits** enabled, for the credit allocation flow.
+- **Opportunity stage values** `Propose`, `Negotiate`, `Hold` and `Commit`.
+
+Then deploy with `sf project deploy start --source-dir force-app --target-org <alias>`.
+
+**Deployment status:** the metadata has not yet been re-validated against a scratch org since the object definitions were completed in October 2026.
+
 ## Folder structure
 
 ```
 salesforce-revenue-recognition/
 ├── README.md                       (this file)
+├── sfdx-project.json
+├── SECURITY.md
 ├── docs/
 │   ├── 01-architecture-overview.md
 │   ├── 02-data-model.md            (includes Mermaid ERD)
@@ -33,8 +50,7 @@ salesforce-revenue-recognition/
 │   │   └── Payment_Schedule__c/    (full)
 │   ├── flows/                      (15 flows)
 │   ├── permissionsets/             (4 permission sets)
-│   ├── reports/SOWLifecycle/       (4 reports)
-│   └── classes/                    (empty — intentional)
+│   └── reports/SOWLifecycle/       (4 reports; no Apex classes, by design)
 └── .gitignore
 ```
 
@@ -65,4 +81,10 @@ By design, this repository excludes:
 
 ## License and reuse
 
-Forking and adapting this reference is encouraged. Attribution is appreciated but not required. The architecture patterns are not novel inventions — they're the result of running into the same Salesforce platform constraints (formula fields don't fire RTFs, lookup fields can't drive matching rules, same-transaction race conditions in cascading triggers) and arriving at the same canonical workarounds that any experienced admin/architect would arrive at independently. The value in this repository is in seeing all of them assembled in one coherent shape.
+Forking and adapting this reference is encouraged. It's MIT-licensed: keep the copyright and license notice when you reuse it. The architecture patterns are not novel inventions — they're the result of running into the same Salesforce platform constraints (formula fields don't fire RTFs, lookup fields can't drive matching rules, same-transaction race conditions in cascading triggers) and arriving at the same canonical workarounds that any experienced admin/architect would arrive at independently. The value in this repository is in seeing all of them assembled in one coherent shape.
+
+## Related
+
+[salesforce-finance-layer](https://github.com/marilometa/salesforce-finance-layer) is the later, fuller version of this work: invoicing, collections and an Apex revenue recognition engine, with a scratch-org demo. The two repositories are separate references and are not meant to be installed in the same org. Some names overlap with different meanings: `Project__c.Opportunity__c` is a lookup here and a master-detail there, and payment terms are modeled differently.
+
+Maintained by [Marilo Meta](https://marilometa.github.io/).
