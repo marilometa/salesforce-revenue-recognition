@@ -2,16 +2,16 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Restrict_Opportunity_Type</fullName>
     <active>true</active>
-    <description>Restricts the Opportunity Type value &quot;Data Providers&quot; to a designated profile. Profile-based check (rather than username-based) so the allowlist scales without per-user maintenance.</description>
+    <description>Restricts the Opportunity Type value &quot;Strategic Partnership&quot; to a designated profile. Profile-based check (rather than username-based) so the allowlist scales without per-user maintenance.</description>
     <errorConditionFormula>AND(
-    ISPICKVAL(Type, &quot;Data Providers&quot;),
+    ISPICKVAL(Type, &quot;Strategic Partnership&quot;),
     NOT(
         OR(
-            $Profile.Name = &quot;Data Provider Manager&quot;,
+            $Profile.Name = &quot;Partnerships Manager&quot;,
             $Profile.Name = &quot;System Administrator&quot;
         )
     )
 )</errorConditionFormula>
     <errorDisplayField>Type</errorDisplayField>
-    <errorMessage>You do not have permission to select &apos;Data Providers&apos; for the Opportunity Type field.</errorMessage>
+    <errorMessage>You do not have permission to select &apos;Strategic Partnership&apos; for the Opportunity Type field.</errorMessage>
 </ValidationRule>

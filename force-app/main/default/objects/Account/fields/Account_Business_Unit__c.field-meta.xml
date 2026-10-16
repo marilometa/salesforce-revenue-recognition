@@ -11,24 +11,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Business Management</fullName>
+                <fullName>Division A</fullName>
                 <default>false</default>
-                <label>Business Management</label>
+                <label>Division A</label>
             </value>
             <value>
-                <fullName>Education</fullName>
+                <fullName>Division B</fullName>
                 <default>false</default>
-                <label>Education</label>
+                <label>Division B</label>
             </value>
             <value>
-                <fullName>Platform SaaS</fullName>
+                <fullName>Division C</fullName>
                 <default>false</default>
-                <label>Platform SaaS</label>
+                <label>Division C</label>
             </value>
             <value>
-                <fullName>Data Partners</fullName>
+                <fullName>Division D</fullName>
                 <default>false</default>
-                <label>Data Partners</label>
+                <label>Division D</label>
             </value>
         </valueSetDefinition>
     </valueSet>

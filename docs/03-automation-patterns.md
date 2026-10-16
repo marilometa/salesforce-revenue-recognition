@@ -30,7 +30,7 @@ The SOW lifecycle is gated by a sequence of validation rules, not by a single st
 
 ## Restrictive validation
 
-The `Restrict_Opportunity_Type` validation rule guards the `"Data Providers"` value on Opportunity.Type. It uses a profile-based allowlist (`$Profile.Name = "Data Provider Manager"` or `"System Administrator"`) rather than a username-based allowlist — profiles scale without per-user maintenance and survive personnel changes cleanly.
+The `Restrict_Opportunity_Type` validation rule guards the `"Strategic Partnership"` value on Opportunity.Type. It uses a profile-based allowlist (`$Profile.Name = "Partnerships Manager"` or `"System Administrator"`) rather than a username-based allowlist — profiles scale without per-user maintenance and survive personnel changes cleanly.
 
 ## Idempotent backfill pattern
 
