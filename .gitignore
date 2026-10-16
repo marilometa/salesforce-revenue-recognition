@@ -1,4 +1,5 @@
-# SFDX
+# SFDX / Salesforce CLI
+.sf/
 .sfdx/
 .localdevserver/
 *.log
@@ -34,5 +35,5 @@ dist/
 .scratchorgs/
 *-result.json
 
-# Audit trail — contains unredacted client references; local-only
+# Local working notes (never published)
 _audit/

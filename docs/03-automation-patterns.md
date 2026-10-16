@@ -16,7 +16,7 @@ Every business rule in this reference is implemented with Flows, Validation Rule
 
 `Project_Deliverable__c.Quantity__c` is a formula derived from `OpportunityLineItem.Quantity`. Salesforce does not fire record-triggered flows on formula recalculation, so a flow listening to `Project_Deliverable` Update with `ISCHANGED(Quantity__c)` will never fire when the upstream OLI Quantity changes.
 
-The fix lives in `Sync_DLIs_On_OLI_Quantity_Change`, which sits on OpportunityLineItem (not Project_Deliverable). It listens for `ISCHANGED(Quantity)`, counts existing DLIs on the related Project_Deliverable, and either creates the delta (Quantity increase) or deletes oldest-Pending-first DLIs (Quantity decrease). It never deletes DLIs marked `Delivered` — a delivery already in the books is immutable from the automation's perspective.
+The fix lives in `Sync_DLIs_On_OLI_Quantity_Change`, which sits on OpportunityLineItem (not Project_Deliverable). It listens for `ISCHANGED(Quantity)`, counts existing DLIs on the related Project_Deliverable, and either creates the delta (Quantity increase) or deletes Pending DLIs newest first (Quantity decrease). It never deletes DLIs marked `Delivered` — a delivery already in the books is immutable from the automation's perspective.
 
 The companion flow `Create_Deliverable_Line_Items_from_Quantity` handles the Create case: when a new Project_Deliverable is inserted with `Quantity > 0`, it builds a collection of N DLI records and writes them in a single DML to stay inside governor limits at high quantities.
 
@@ -26,7 +26,7 @@ The companion flow `Create_Deliverable_Line_Items_from_Quantity` handles the Cre
 
 ## Approval gating
 
-The SOW lifecycle is gated by a sequence of validation rules, not by a single state machine. `SOW_Delivered_Requires_Reviews` blocks `SOW_Delivered__c = true` unless both `Legal_Reviewed__c` and `Finance_Reviewed__c` are true. `SOW_Executed_Requires_Reviews` blocks `SOW_Executed__c = true` unless all three (Legal, Finance, Delivered) are true. `Require_SOW_Executed_Before_ClosedWon` blocks the final Stage transition unless Executed is true. The result is a deterministic chain: a Closed Won record always has Legal Reviewed → Finance Reviewed → SOW Delivered → SOW Executed in its history. The `Finance_Approval_Process` autolaunched flow (kept as `Draft` in source) plugs into this chain when the team wants a formal approval submission rather than a manual checkbox flip.
+The SOW lifecycle is gated by a sequence of validation rules, not by a single state machine. `SOW_Delivered_Requires_Reviews` blocks `SOW_Delivered__c = true` unless both `Legal_Reviewed__c` and `Finance_Reviewed__c` are true. `SOW_Executed_Requires_Reviews` blocks `SOW_Executed__c = true` unless all three (Legal, Finance, Delivered) are true. `Require_SOW_Executed_Before_ClosedWon` blocks the final Stage transition unless Executed is true. The result is a deterministic chain: a Closed Won record always has Legal Reviewed → Finance Reviewed → SOW Delivered → SOW Executed in its history. The `Finance_Approval_Process` approval workflow flow (kept as `Draft` in source) plugs into this chain when the team wants a formal approval submission rather than a manual checkbox flip.
 
 ## Restrictive validation
 
