@@ -1,5 +1,7 @@
 # Salesforce Revenue Recognition — Reference Architecture
 
+[![Validate metadata](https://github.com/marilometa/salesforce-revenue-recognition/actions/workflows/validate.yml/badge.svg)](https://github.com/marilometa/salesforce-revenue-recognition/actions/workflows/validate.yml)
+
 A declarative-first reference architecture for managing the post-Close Won handoff: project tracking, milestone-based deliverable decomposition, payment scheduling, and cash-collection forecasting. Anonymized and extracted from a production engagement.
 
 ## The problem this solves
