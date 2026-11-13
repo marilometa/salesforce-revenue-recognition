@@ -38,7 +38,7 @@ sf org open
 
 Delete `.forceignore` afterwards so it isn't committed.
 
-**Deployment status:** not yet re-validated against a scratch org since the object definitions were completed in October 2026. Every push is checked automatically for well-formed metadata.
+**Deployment status:** verified in November 2026. All 120 components deployed to a fresh Developer Edition scratch org with no errors, and the `Access_Projects_and_Deliverables` permission set assigned cleanly. That run left out only the two flows listed under *Before you deploy*, which need setup a metadata deploy can't create. Every push is also checked automatically for well-formed metadata.
 
 ## Folder structure
 
