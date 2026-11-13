@@ -17,18 +17,28 @@ Standard Salesforce covers the sales funnel (Lead → Opportunity → Closed Won
 
 ## Before you deploy
 
-This repository is the architecture surface, not a complete org. Create these in the target org first, or the deploy will fail:
+The repository includes the tabs, the `SOWLifecycle` report folder and the `Finance_Team` public group. Two active flows need setup that a metadata deploy can't create:
 
-- **Tabs** for `Project__c`, `Project_Deliverable__c`, `Deliverable_Line_Item__c` and `Payment_Schedule__c`. The permission sets grant access to them.
-- **Report folder** `SOWLifecycle`, for the four reports.
-- **Email alert** `Opportunity.Notification_to_Finance_when_SOW_Delivered_TRUE`, used by the SOW notification flow.
-- **Public group** `Finance_Team`, used by the approval flow.
-- **Opportunity Splits** enabled, for the credit allocation flow.
-- **Opportunity stage values** `Propose`, `Negotiate`, `Hold` and `Commit`.
+- **Email alert** `Opportunity.Notification_to_Finance_when_SOW_Delivered_TRUE`, used by `FIN_SOW_Delivered_Notification_Flow`.
+- **Opportunity Splits** enabled, for `Auto_Confirm_Credit_Allocation_from_Opportunity_Team_and_Splits`.
 
-Then deploy with `sf project deploy start --source-dir force-app --target-org <alias>`.
+At runtime the automation also expects the Opportunity stage values `Propose`, `Negotiate`, `Hold` and `Commit`.
 
-**Deployment status:** the metadata has not yet been re-validated against a scratch org since the object definitions were completed in October 2026.
+## Try it in a scratch org
+
+This deploys everything except the two flows above:
+
+```bash
+sf org create scratch --definition-file config/project-scratch-def.json --alias rev-rec --set-default --target-dev-hub <your-devhub-alias>
+printf '%s\n' '**/FIN_SOW_Delivered_Notification_Flow.flow-meta.xml' '**/Auto_Confirm_Credit_Allocation_from_Opportunity_Team_and_Splits.flow-meta.xml' > .forceignore
+sf project deploy start --source-dir force-app
+sf org assign permset --name Access_Projects_and_Deliverables
+sf org open
+```
+
+Delete `.forceignore` afterwards so it isn't committed.
+
+**Deployment status:** not yet re-validated against a scratch org since the object definitions were completed in October 2026. Every push is checked automatically for well-formed metadata.
 
 ## Folder structure
 
@@ -37,6 +47,7 @@ salesforce-revenue-recognition/
 ├── README.md                       (this file)
 ├── sfdx-project.json
 ├── SECURITY.md
+├── config/project-scratch-def.json
 ├── docs/
 │   ├── 01-architecture-overview.md
 │   ├── 02-data-model.md            (includes Mermaid ERD)
@@ -51,8 +62,10 @@ salesforce-revenue-recognition/
 │   │   ├── Deliverable_Line_Item__c/ (full)
 │   │   └── Payment_Schedule__c/    (full)
 │   ├── flows/                      (15 flows)
+│   ├── groups/                     (Finance_Team)
+│   ├── tabs/                       (4 custom object tabs)
 │   ├── permissionsets/             (4 permission sets)
-│   └── reports/SOWLifecycle/       (4 reports; no Apex classes, by design)
+│   └── reports/SOWLifecycle/       (folder + 4 reports; no Apex classes, by design)
 └── .gitignore
 ```
 
