@@ -6,6 +6,6 @@
     <inlineHelpText>Check this box if there is an active NDA with this customer. When checked, an NDA Expiration Date is required.</inlineHelpText>
     <label>NDA Completed</label>
     <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>true</trackHistory>
+    <trackHistory>false</trackHistory>
     <type>Checkbox</type>
 </CustomField>

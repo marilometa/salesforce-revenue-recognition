@@ -6,6 +6,6 @@
     <inlineHelpText>Check this box once the SOW has been sent to the customer. When checked, Salesforce automatically captures the SOW Delivered Date. If the SOW was delivered earlier, the date can be adjusted manually.</inlineHelpText>
     <label>SOW Delivered</label>
     <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>true</trackHistory>
+    <trackHistory>false</trackHistory>
     <type>Checkbox</type>
 </CustomField>

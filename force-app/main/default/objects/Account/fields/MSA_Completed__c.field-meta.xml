@@ -6,6 +6,6 @@
     <inlineHelpText>Check this box if there is an active MSA with this customer. When checked, an MSA Expiration Date is required.</inlineHelpText>
     <label>MSA Completed</label>
     <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>true</trackHistory>
+    <trackHistory>false</trackHistory>
     <type>Checkbox</type>
 </CustomField>
